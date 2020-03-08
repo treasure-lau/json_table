@@ -17,6 +17,7 @@ class JsonTable extends StatefulWidget {
   final TableCellBuilder tableCellBuilder;
   final List<JsonTableColumn> columns;
   final bool showColumnToggle;
+  final String title;
   final bool allowRowHighlight;
   final Color rowHighlightColor;
   final int paginationRowCount;
@@ -28,6 +29,7 @@ class JsonTable extends StatefulWidget {
     this.tableHeaderBuilder,
     this.tableCellBuilder,
     this.columns,
+    this.title,
     this.showColumnToggle = false,
     this.allowRowHighlight = false,
     this.rowHighlightColor,
@@ -135,44 +137,64 @@ class _JsonTableState extends State<JsonTable> {
                 controller: widget.screenshotController,
                 child: Container(
                   color: Theme.of(context).cardColor,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: (widget.columns != null)
-                      ? Row(
-                          children: widget.columns
-                              .where((item) =>
-                                  filterHeaderList.contains(item.field))
-                              .map(
-                                (item) => TableColumn(
-                                  item.label,
-                                  _getPaginatedData(),
-                                  widget.tableHeaderBuilder,
-                                  widget.tableCellBuilder,
-                                  item,
-                                  onRowTap,
-                                  highlightedRowIndex,
-                                  widget.allowRowHighlight,
-                                  widget.rowHighlightColor,
-                                ),
-                              )
-                              .toList(),
-                        )
-                      : Row(
-                          children: filterHeaderList
-                              .map(
-                                (header) => TableColumn(
-                                  header,
-                                  _getPaginatedData(),
-                                  widget.tableHeaderBuilder,
-                                  widget.tableCellBuilder,
-                                  null,
-                                  onRowTap,
-                                  highlightedRowIndex,
-                                  widget.allowRowHighlight,
-                                  widget.rowHighlightColor,
-                                ),
-                              )
-                              .toList(),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      if (widget.title != null && title.isNotEmpty)
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            "${widget.title}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
+                      (widget.columns != null)
+                          ? Row(
+                              children: widget.columns
+                                  .where((item) =>
+                                      filterHeaderList.contains(item.field))
+                                  .map(
+                                    (item) => TableColumn(
+                                      item.label,
+                                      _getPaginatedData(),
+                                      widget.tableHeaderBuilder,
+                                      widget.tableCellBuilder,
+                                      item,
+                                      onRowTap,
+                                      highlightedRowIndex,
+                                      widget.allowRowHighlight,
+                                      widget.rowHighlightColor,
+                                    ),
+                                  )
+                                  .toList(),
+                            )
+                          : Row(
+                              children: filterHeaderList
+                                  .map(
+                                    (header) => TableColumn(
+                                      header,
+                                      _getPaginatedData(),
+                                      widget.tableHeaderBuilder,
+                                      widget.tableCellBuilder,
+                                      null,
+                                      onRowTap,
+                                      highlightedRowIndex,
+                                      widget.allowRowHighlight,
+                                      widget.rowHighlightColor,
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text("©Workozy ${DateTime.now().year}"),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
