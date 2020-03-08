@@ -128,50 +128,52 @@ class _JsonTableState extends State<JsonTable> {
                 ],
               ),
             ),
-          Screenshot(
-            controller: widget.screenshotController,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              color: Theme.of(context).cardColor,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: (widget.columns != null)
-                    ? Row(
-                        children: widget.columns
-                            .where(
-                                (item) => filterHeaderList.contains(item.field))
-                            .map(
-                              (item) => TableColumn(
-                                item.label,
-                                _getPaginatedData(),
-                                widget.tableHeaderBuilder,
-                                widget.tableCellBuilder,
-                                item,
-                                onRowTap,
-                                highlightedRowIndex,
-                                widget.allowRowHighlight,
-                                widget.rowHighlightColor,
-                              ),
-                            )
-                            .toList(),
-                      )
-                    : Row(
-                        children: filterHeaderList
-                            .map(
-                              (header) => TableColumn(
-                                header,
-                                _getPaginatedData(),
-                                widget.tableHeaderBuilder,
-                                widget.tableCellBuilder,
-                                null,
-                                onRowTap,
-                                highlightedRowIndex,
-                                widget.allowRowHighlight,
-                                widget.rowHighlightColor,
-                              ),
-                            )
-                            .toList(),
-                      ),
+          Container(
+            color: Theme.of(context).cardColor,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Screenshot(
+                controller: widget.screenshotController,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: (widget.columns != null)
+                      ? Row(
+                          children: widget.columns
+                              .where((item) =>
+                                  filterHeaderList.contains(item.field))
+                              .map(
+                                (item) => TableColumn(
+                                  item.label,
+                                  _getPaginatedData(),
+                                  widget.tableHeaderBuilder,
+                                  widget.tableCellBuilder,
+                                  item,
+                                  onRowTap,
+                                  highlightedRowIndex,
+                                  widget.allowRowHighlight,
+                                  widget.rowHighlightColor,
+                                ),
+                              )
+                              .toList(),
+                        )
+                      : Row(
+                          children: filterHeaderList
+                              .map(
+                                (header) => TableColumn(
+                                  header,
+                                  _getPaginatedData(),
+                                  widget.tableHeaderBuilder,
+                                  widget.tableCellBuilder,
+                                  null,
+                                  onRowTap,
+                                  highlightedRowIndex,
+                                  widget.allowRowHighlight,
+                                  widget.rowHighlightColor,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                ),
               ),
             ),
           ),
