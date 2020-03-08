@@ -19,6 +19,7 @@ class JsonTable extends StatefulWidget {
   final bool showColumnToggle;
   final String title;
   final bool allowRowHighlight;
+  final bool isSaving;
   final Color rowHighlightColor;
   final int paginationRowCount;
   final ScreenshotController screenshotController;
@@ -35,6 +36,7 @@ class JsonTable extends StatefulWidget {
     this.rowHighlightColor,
     this.paginationRowCount,
     this.screenshotController,
+    this.isSaving = false,
   }) : super(key: key);
 
   @override
@@ -141,7 +143,9 @@ class _JsonTableState extends State<JsonTable> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      if (widget.title != null && widget.title.isNotEmpty)
+                      if (widget.isSaving &&
+                          widget.title != null &&
+                          widget.title.isNotEmpty)
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: Text(
@@ -189,10 +193,11 @@ class _JsonTableState extends State<JsonTable> {
                                   )
                                   .toList(),
                             ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("©Workozy ${DateTime.now().year}"),
-                      ),
+                      if (widget.isSaving)
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: Text("©workozy ${DateTime.now().year}"),
+                        ),
                     ],
                   ),
                 ),
