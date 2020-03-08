@@ -129,12 +129,12 @@ class _JsonTableState extends State<JsonTable> {
               ),
             ),
           Container(
-            color: Theme.of(context).cardColor,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Screenshot(
                 controller: widget.screenshotController,
                 child: Container(
+                  color: Theme.of(context).cardColor,
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   child: (widget.columns != null)
                       ? Row(
