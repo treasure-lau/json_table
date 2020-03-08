@@ -141,7 +141,7 @@ class _JsonTableState extends State<JsonTable> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      if (widget.title != null && title.isNotEmpty)
+                      if (widget.title != null && widget.title.isNotEmpty)
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: Text(
