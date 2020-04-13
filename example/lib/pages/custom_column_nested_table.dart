@@ -13,7 +13,7 @@ class CustomColumnNestedTable extends StatefulWidget {
 
 class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
   final String jsonSample =
-      '[{"name":"Ram","email":{"1":"ram@gmail.com"},"age":23,"DOB":"1990-12-01"},'
+      '[{"name":"Ram","email":{"1":"ram@gmail.com"},"age":23,"DOB":"1990-12-01","Date":"2020-03-26T18:57:28.301254Z"},'
       '{"name":"Shyam","email":{"1":"shyam23@gmail.com"},"age":18,"DOB":"1995-07-01"},'
       '{"name":"John","email":{"1":"john@gmail.com"},"age":10,"DOB":"2000-02-24"}]';
   bool toggle = true;
@@ -22,6 +22,7 @@ class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
   @override
   void initState() {
     super.initState();
+    print(DateTime.now().toIso8601String());
     columns = [
       JsonTableColumn("name", label: "Name"),
       JsonTableColumn("age", label: "Age"),
@@ -36,6 +37,7 @@ class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
         valueBuilder: eligibleToVote,
       ),
       JsonTableColumn("email.1", label: "E-mail", defaultValue: "NA"),
+      JsonTableColumn("Date", label: "Date", type: "date"),
     ];
   }
 
