@@ -122,7 +122,7 @@ class TableColumn extends StatelessWidget {
     if (column?.valueBuilder != null) {
       return column.valueBuilder(value);
     }
-    print('formatted value:$value');
+    // print('formatted value:$value');
     return value;
   }
 }
